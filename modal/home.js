@@ -40,11 +40,11 @@ const home= {
                     "IP_3": ip4
                 });
     
-            
+                console.log("sd")
             next()
         }
         catch (e) {
-            
+            console.log(e)
             next()
         }
     }
