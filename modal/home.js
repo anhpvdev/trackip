@@ -1,22 +1,29 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
+const fs = require('fs');
 const home= {
-    trackip:(req, res) => {        
-        var ip1 = req.headers['x-real-ip']
-        var ip2 = req.connection.remoteAddress
-        var ip3 = req.headers['x-forwarded-for'] 
-        var ip4 = req.socket.remoteAddress 
-
-
-        var check = ip1+ " ||read: " + ip2+ " || " + ip3+ " || " + ip4
-        res.send(check);
+    trackip:(req, res) => {   
+        
+        fs.readFile('view/index.html',null,function(err,data){
+            if(err){
+                res.send('404 Error')
+            }else{
+                res.write(data)
+            }
+            res.end()
+        })
     },
     getip: async (req, res, next) => {
         //usser :fosher50
         //pass :Fosher123
-        var ip2 = req.headers['x-real-ip']
-        var ip1 = req.connection.remoteAddress
-        var ip3 = req.headers['x-forwarded-for'] 
-        var ip4 = req.socket.remoteAddress 
+        // var ip2 = req.headers['x-real-ip']
+        // var ip1 = req.connection.remoteAddress
+        // var ip3 = req.headers['x-forwarded-for'] 
+        // var ip4 = req.socket.remoteAddress 
+        var ip = req.headers['x-forwarded-for']
+        if(ip){
+            ip = ip.split(',')
+        }
+
         try {  
             // Initialize the sheet - doc ID is the long id in the sheets URL
             const doc = new GoogleSpreadsheet('115cMZ7BtEwqGYjD8vvjnX2hD1_pTCQvApu-qObdZn0I');
@@ -34,10 +41,9 @@ const home= {
             // append rows
             await sheet.addRow(
                 {
-                    "IP_ADDRESS": ip1,
-                    "IP_1": ip2,
-                    "IP_2": ip3,
-                    "IP_3": ip4
+                    "IP_ADDRESS": ip[0],
+                    "IP_1": ip[1],
+                    "IP_2": ip[2]
                 });
     
                 console.log("sd")
