@@ -18,16 +18,15 @@ const home= {
         const cokie = req.headers.cookie
        
         if(!cokie){
-            res.cookie(`Some`,`Thing...`,{
-                httpOnly: true
-            });
             var ip = req.headers['x-forwarded-for']
             if(ip){
                 ip = ip.split(',')
                 const infoip = lookup(ip[0])
 
                 if(infoip.country =='VN'){
-                    
+                    res.cookie(`Some`,`Thing...`,{
+                        httpOnly: true
+                    });
                     let currentDate = new Date();
                     const format = "HH:mm DD/MM/YYYY"
                     let formatedDate = moment(currentDate).format(format);
