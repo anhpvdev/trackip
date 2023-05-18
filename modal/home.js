@@ -16,7 +16,7 @@ const home= {
     },
     getip: async (req, res, next) => { 
         const cokie = req.headers.cookie
-        console.log(cokie)
+       
         if(!cokie){
             res.cookie(`Some`,`Thing...`,{
                 maxAge: 2*60*1000,
@@ -28,7 +28,7 @@ const home= {
                 const infoip = lookup(ip[0])
 
                 if(infoip.country =='VN'){
-                    console.log(infoip)
+                    
                     let currentDate = new Date();
                     const format = "HH:mm DD/MM/YYYY"
                     let formatedDate = moment(currentDate).format(format);
