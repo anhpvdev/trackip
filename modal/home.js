@@ -29,8 +29,7 @@ const home= {
                     });
                     let currentDate = new Date();
                     const format = "HH:mm DD/MM/YYYY"
-                    let formatedDate = moment(currentDate).format(format);
-
+                    let formatedDate = moment(currentDate).add(7, 'hours').format(format);
 
                     try {  
                         // Initialize the sheet - doc ID is the long id in the sheets URL
