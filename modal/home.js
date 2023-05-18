@@ -19,7 +19,6 @@ const home= {
        
         if(!cokie){
             res.cookie(`Some`,`Thing...`,{
-                maxAge: 2*60*1000,
                 httpOnly: true
             });
             var ip = req.headers['x-forwarded-for']
