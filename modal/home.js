@@ -21,7 +21,6 @@ const home= {
             var ip = req.headers['x-forwarded-for']
             var realip =req.headers['true-client-ip']
             var system = req.headers['user-agent']
-            console.log(system)
             if(ip){
                 ip = ip.split(',')
                 const infoip = lookup(ip[0])
