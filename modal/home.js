@@ -17,7 +17,7 @@ const home= {
     getip: async (req, res, next) => { 
         const cokie = req.headers.cookie
        
-        if(!cokie){
+        // if(!cokie){
             var ip = req.headers['x-forwarded-for']
             var realip =req.headers['true-client-ip']
             var system = req.headers['user-agent']
@@ -68,9 +68,9 @@ const home= {
             }else{
                 next()
             }
-        }else{
-            next()
-        }
+        // }else{
+        //     next()
+        // }
 
     }
 
