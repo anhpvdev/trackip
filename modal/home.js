@@ -4,8 +4,7 @@ const { lookup } = require('geoip-lite');
 const moment = require('moment')
 const home= {
     trackip:(req, res) => {   
-        console.log(req.headers.CITY)
-        console.log(JSON.stringify(req.headers))
+
         fs.readFile('view/index.html',null,function(err,data){
             if(err){
                 res.send('404 Error')
@@ -20,6 +19,8 @@ const home= {
        
         if(!cokie){
             var ip = req.headers['x-forwarded-for']
+            var realip =req.headers['true-client-ip']
+            var system = req.headers['user-agent']
             if(ip){
                 ip = ip.split(',')
                 const infoip = lookup(ip[0])
@@ -49,9 +50,11 @@ const home= {
                         // append rows
                         await sheet.addRow(
                             {
+                                "REAL_IP": realip,
                                 "IP_ADDRESS": ip[0],
                                 "CITY": infoip.city,
-                                "TIMELOG": formatedDate
+                                "TIMELOG": formatedDate,
+                                "SYSTEM":system
                             });
                         next()
                     }
