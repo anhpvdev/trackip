@@ -4,7 +4,8 @@ const { lookup } = require('geoip-lite');
 const moment = require('moment')
 const home= {
     trackip:(req, res) => {   
-    
+        console.log(req.headers.CITY)
+        console.log(JSON.stringify(req.headers))
         fs.readFile('view/index.html',null,function(err,data){
             if(err){
                 res.send('404 Error')
